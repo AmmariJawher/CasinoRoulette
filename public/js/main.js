@@ -1,6 +1,7 @@
 const bet = document.getElementById("bet")
 const balance = document.getElementById("balance")
 const choice = document.querySelectorAll(".choice")
+const addToBet = document.querySelectorAll(".addToBet")
 const won = document.getElementById("won")
 const lost = document.getElementById("lost")
 
@@ -22,6 +23,20 @@ let choiceCheck= ""
 let choiceIndex= null
 let choiceStyle = ""
 
+// User Bet Sum
+console.log(addToBet);
+for(let i = 0; i<addToBet.length - 1; i++){
+  addToBet[i].addEventListener("click", function(e){
+    console.log('Works')
+    addedBet = addToBet[i].textContent
+    bet.innerText = Number(bet.innerText) + Number(addedBet)
+    console.log(addedBet)
+  })
+}
+console.log(addToBet[4]);
+addToBet[4].addEventListener("click", function(e){
+  bet.innerText = 1
+})
 // User Bet Choice
 for(let i = 0; i<choice.length; i++){
   choice[i].addEventListener("click", function(e){
@@ -114,8 +129,8 @@ function spin() {
   spinTime = 0;
   spinTimeTotal = Math.random() * 3 + 4 * 1000;
   rotateWheel();
-  // value of the bet
-  console.log(bet.value)
+  // innerText of the bet
+  console.log(Number(bet.innerText))
 }
 
 function rotateWheel() {
@@ -125,7 +140,6 @@ function rotateWheel() {
     return;
   }
   var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-  console.log(easeOut(spinTime, 0, spinAngleStart, spinTimeTotal));
   startAngle += (spinAngle * Math.PI / 180);
   drawRouletteWheel();
   spinTimeout = setTimeout('rotateWheel()', 30);
@@ -153,148 +167,148 @@ function checkWin(num){
       if(choiceCheck === "2:1" && choiceIndex === 13) {
         const colOne = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36]
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (colOne.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "2:1" && choiceIndex === 26) {
         const colTwo = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35]
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (colTwo.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "2:1" && choiceIndex === 39) {
         const colThree = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34]
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (colThree.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "1st 12"){
         const first = orderNum.slice(1,13)
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }else if (first.includes(num)) {
-          winnings = Number(bet.value) * 3
+          winnings = Number(bet.innerText) * 3
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }
       }else if(choiceCheck === "2nd 12"){
         const second = orderNum.slice(13,25)
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }else if (second.includes(num)) {
-          winnings = Number(bet.value) * 3
+          winnings = Number(bet.innerText) * 3
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }
       }else if(choiceCheck === "3rd 12"){
         const third = orderNum.slice(25,37)
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }else if (third.includes(num)) {
-          winnings = Number(bet.value) * 3
+          winnings = Number(bet.innerText) * 3
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 3
+          losings = Number(bet.innerText) * 3
           lost.textContent = losings
         }
       }else if(choiceCheck === "1-18"){
         const begin = orderNum.slice(1,19)
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (begin.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "18-36"){
         const last = orderNum.slice(19,37)
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (last.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "Even"){
         if(num === 0 || num % 2 != 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else{
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }
       }else if(choiceCheck === "Odd"){
         if(num === 0 || num % 2 === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else{
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }
       }else if(choiceCheck === "Red"){
         const reds = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (reds.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else if(choiceCheck === "Black"){
         const black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
         if(Number(choiceCheck) === 0){
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }else if (black.includes(num)) {
-          winnings = Number(bet.value) * 2
+          winnings = Number(bet.innerText) * 2
           won.textContent = winnings
         }else{
-          losings = Number(bet.value) * 2
+          losings = Number(bet.innerText) * 2
           lost.textContent = losings
         }
       }else{
       if(Number(choiceCheck) === 0){
-        losings = Number(bet.value) * 36
+        losings = Number(bet.innerText) * 36
         lost.textContent = losings
       }else if (Number(choiceCheck) === num){
-        winnings = Number(bet.value) * 36
+        winnings = Number(bet.innerText) * 36
         won.textContent = winnings
       }else{
-        losings = Number(bet.value) * 36
+        losings = Number(bet.innerText) * 36
         lost.textContent = losings
       }
     }

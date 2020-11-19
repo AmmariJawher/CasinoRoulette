@@ -1,6 +1,7 @@
 const bet = document.getElementById("bet")
 const balance = document.getElementById("balance")
 const choice = document.querySelectorAll(".choice")
+const addToBet = document.querySelectorAll(".addToBet")
 const won = document.getElementById("won")
 const lost = document.getElementById("lost")
 
@@ -21,13 +22,24 @@ balance.textContent = 1000
 let choiceCheck= ""
 let choiceIndex= null
 let choiceStyle = ""
-
+console.log(addToBet);
+addToBet[1].addEventListener("click", console.log("Listener works"))
+for(let i = 0; i<addToBet.length; i++){
+  addToBet[i].addEventListener("click", function(e){
+    console.log('Works')
+    e.preventDefault()
+    addedBet = addToBet[i].textContent
+    bet.innerText = Number(bet.innerText) + Number(addedBet)
+    console.log(addedBet)
+  })
+}
 // User Bet Choice
 for(let i = 0; i<choice.length; i++){
   choice[i].addEventListener("click", function(e){
     e.preventDefault()
     choiceCheck = choice[i].textContent
     choiceIndex = i
+    choice.style.backgroundColor = "pink";
     console.log(choiceCheck)
   })
 }

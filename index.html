@@ -17,7 +17,14 @@
     </section>
     <section>
       <h2>Balance: $<span id="balance"></span></h2>
-      <h2>Bet: <input id="bet" type="text" placeholder="$"></h2>
+      <div class="betController">
+        <div class="addToBet">1</div>
+        <div class="addToBet">5</div>
+        <div class="addToBet">10</div>
+        <div class="addToBet">20</div>
+        <div class="addToBet">Effacer</div>
+      </div>
+      <h2>Bet: <span id="bet">1</span></h2>
       <h2>Won: <span id="won"></span></h2>
       <h2>Lost: <span id="lost"></span></h2>
       <input type="button" value="spin" id='spin' />
