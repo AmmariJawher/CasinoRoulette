@@ -2,15 +2,19 @@
   "name": "CasinoRoulette",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron . ",
+    "css-build": "node-sass --omit-source-map-url sass/style.scss public/css/style.css",
+    "css-watch": "npm run css-build -- --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^10.1.5"
-  }
+    "bulma": "^0.9.1",
+    "electron": "^10.1.5",
+    "node-sass": "^5.0.0"
+  },
+  "dependencies": {}
 }
