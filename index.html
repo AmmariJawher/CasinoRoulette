@@ -69,81 +69,127 @@
         </section>
       </div>
       <div class="column is-one-quarter">
+        <div class="tabs is-fullwidth">
+          <ul>
+            <li class="is-active">
+              <a>
+                <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                <span>Pictures</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                <span>History</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+  
         <section>
-          <div class="tabs is-fullwidth">
+          <div class="table-container">
+            <table class="table is-fullwidth is-bordered is-striped is-narrow is-hoverable">
+              <thead>
+                <tr>
+                  <th>Selection</th>
+                  <th>Multiplier</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Num 3</td>
+                  <td>36</td>
+                  <td>X</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="betController tabs is-toggle is-centered">
             <ul>
-              <li class="is-active">
+              <li class="addToBet">
                 <a>
                   <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-                  <span>Pictures</span>
+                  <span>1</span>
                 </a>
               </li>
-              <li>
+              <li class="addToBet">
                 <a>
                   <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                  <span>History</span>
+                  <span>5</span>
+                </a>
+              </li>
+              <li class="addToBet">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                  <span>10</span>
+                </a>
+              </li>
+              <li class="addToBet">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                  <span>20</span>
+                </a>
+              </li>
+              <li class="addToBet">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                  <span>Effacer</span>
                 </a>
               </li>
             </ul>
           </div>
-    
-          <section>
-            <div class="betController tabs is-toggle is-fullwidth is-centered">
-              <ul>
-                <li class="addToBet">
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-                    <span>1</span>
-                  </a>
-                </li>
-                <li class="addToBet">
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                    <span>5</span>
-                  </a>
-                </li>
-                <li class="addToBet">
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                    <span>10</span>
-                  </a>
-                </li>
-                <li class="addToBet">
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                    <span>20</span>
-                  </a>
-                </li>
-                <li class="addToBet">
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                    <span>Effacer</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <h2>Bet: <span id="bet">1</span></h2>
-            <h2>Won: <span id="won"></span></h2>
-            <h2>Lost: <span id="lost"></span></h2>
-            <input type="button" value="spin" id='spin' />
-            
-            <div class="tabs is-toggle is-fullwidth">
-              <ul>
-                <li class="has-background-danger">
-                  <a>
-                    <span class="icon is-small "><i class="fas fa-image" aria-hidden="true"></i></span>
-                    <span>Reset</span>
-                  </a>
-                </li class="has-background-primary">
-                <li>
-                  <a>
-                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                    <span>Print</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
+          <div class="table-container">
+            <table class="table is-fullwidth is-bordered is-striped is-narrow is-hoverable">
+              <thead>
+                <tr>
+                  <th>Combi</th>
+                  <th>Max Gain</th>
+                  <th>Min Gain</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Num 3</td>
+                  <td>36</td>
+                  <td>X</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <input type="button" value="spin" id="spin" />
+          
+          <div class="table-container">
+            <table class="table is-fullwidth is-narrow">
+              <tbody>
+                <tr>
+                  <th>Mise totale:</th>
+                  <td id="bet">1</td>
+                </tr>
+                <tr>
+                  <th>Gain total Max:</th>
+                  <td id="won">36</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tabs is-toggle is-fullwidth">
+            <ul>
+              <li class="has-background-danger">
+                <a>
+                  <span class="icon is-small "><i class="fas fa-image" aria-hidden="true"></i></span>
+                  <span>Reset</span>
+                </a>
+              </li>
+              <li class="has-background-success">
+                <a>
+                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                  <span>Print</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
       </div>
     </div>

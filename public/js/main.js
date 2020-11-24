@@ -20,11 +20,12 @@ let choiceCheck= ""
 let choiceIndex= null
 let choiceStyle = ""
 
+let choiceList = []
+
 // User Bet Sum
 console.log(addToBet);
 for(let i = 0; i<addToBet.length - 1; i++){
   addToBet[i].addEventListener("click", function(e){
-    console.log('Works')
     addedBet = addToBet[i].textContent
     bet.innerText = Number(bet.innerText) + Number(addedBet)
     console.log(addedBet)
@@ -41,6 +42,28 @@ for(let i = 0; i<choice.length; i++){
     e.preventDefault()
     choiceCheck = choice[i].textContent
     choiceIndex = i
-    console.log(choiceCheck)
+    choiceList.push(
+      {
+        choice: choiceCheck,
+        combi: checkCombi(choiceCheck)
+      }
+    )
+    console.log(choiceList)
   })
+}
+
+// Check Combi
+function checkCombi(num){
+  let combi = ""
+
+    if(choiceCheck === "2:1" || choiceCheck === "1-18" || choiceCheck === "18-36"
+    || choiceCheck === "Even" || choiceCheck === "Odd" || choiceCheck === "Red"
+    ||choiceCheck === "Black") {
+      combi = 2
+    }else if(choiceCheck === "1st 12" || choiceCheck === "2nd 12" || choiceCheck === "3rd 12"){
+      combi = 3
+    }else{
+      combi = 36
+  }
+  return combi
 }
