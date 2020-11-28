@@ -16,5 +16,7 @@
     "electron": "^10.1.5",
     "node-sass": "^5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "jspdf": "^2.1.1"
+  }
 }

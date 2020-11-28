@@ -1,69 +1,150 @@
-const bet = document.getElementById("bet")
+const mise = document.getElementById("mise")
+const combi = document.getElementById("combi")
+const cotesMax = document.getElementById("cotesMax")
+const cotesMin = document.getElementById("cotesMin")
+const maxGain = document.getElementById("maxGain")
+const minGain = document.getElementById("minGain")
+const selection = document.getElementById("Selection")
 const choice = document.querySelectorAll(".choice")
 const addToBet = document.querySelectorAll(".addToBet")
-const won = document.getElementById("won")
-const lost = document.getElementById("lost")
-
-var options = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
-
-var startAngle = 0;
-var arc = Math.PI / (options.length / 2);
-var spinTimeout = null;
-
-var spinArcStart = 10;
-var spinTime = 0;
-var spinTimeTotal = 0;
-
-var ctx;
 
 let choiceCheck= ""
 let choiceIndex= null
-let choiceStyle = ""
 
-let choiceList = []
+let ticket = {
+  combi: null,
+  minGain: null,
+  maxGain: null,
+  cotesMin: null,
+  cotesMax: null,
+  status: null,
+  mise: 1,
+  choiceList: []
+}
+ 
 
-// User Bet Sum
-console.log(addToBet);
+// Tabs Navigation
+document.getElementsByClassName("tablinks")[0].click();
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  tablinks = document.getElementsByClassName("tablinks");
+
+  for (i = 0; i < tabcontent.length; i++) {
+    if(tabcontent[i].classList.contains("is-block")) {
+      tabcontent[i].className = tabcontent[i].className.replace(" is-block", " is-hidden")
+    }
+  }
+
+  // Get all elements with class="tablinks" and remove the class "is-active"
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+  }
+
+  // Show the current tab, and add an "is-active" class to the button that opened the tab
+  let target = document.getElementById(tabName)
+  target.className = target.className.replace(" is-hidden", " is-block");
+  evt.currentTarget.className += " is-active";
+}
+
+// Modal Controller
+function showModal(idName) {
+  modal = document.getElementById(idName);
+  modal.className += " is-active"
+}
+function hideModal(idName) {
+  modal = document.getElementById(idName);
+  modal.className = modal.className.replace(" is-active", "");
+}
+
+
+// Select Bets
 for(let i = 0; i<addToBet.length - 1; i++){
   addToBet[i].addEventListener("click", function(e){
     addedBet = addToBet[i].textContent
-    bet.innerText = Number(bet.innerText) + Number(addedBet)
-    console.log(addedBet)
+    ticket.mise += Number(addedBet)
+    mise.innerText = ticket.mise
+    updateGain()
   })
 }
-
 addToBet[4].addEventListener("click", function(e){
-  bet.innerText = 1
+  ticket.mise = 1
+  mise.innerText = 1
+  updateGain()
 })
 
-// User Bet Choice
+/* Add user selections to the side in a table.
+  each with an event that call removeSelect function if delete clicked */
 for(let i = 0; i<choice.length; i++){
   choice[i].addEventListener("click", function(e){
-    e.preventDefault()
     choiceCheck = choice[i].textContent
-    choiceIndex = i
-    choiceList.push(
-      {
-        choice: choiceCheck,
-        combi: checkCombi(choiceCheck)
-      }
-    )
-    console.log(choiceList)
+    ticket.choiceList.push({
+      choice: choice[i].textContent,
+      cotes: checkCotes(choiceCheck)
+    })
+    updateCombi()
+    updateCotes(ticket.choiceList)
+    updateGain()
+    selection.innerHTML += "<tr><td>" + String(ticket.choiceList[ticket.choiceList.length-1].choice) + "</td><td>"+
+    String(ticket.choiceList[ticket.choiceList.length-1].cotes) +"</td><td onclick='removeSelect(event)'>X</td></tr>"
   })
 }
 
-// Check Combi
-function checkCombi(num){
-  let combi = ""
+function removeSelect(evt) {
+  targetSelection = evt.currentTarget.parentElement
+  getElementIndex(targetSelection)
+  ticket.choiceList.splice(targetSelection, 1)
+  targetSelection.remove()
+  updateCombi()
+  updateCotes(ticket.choiceList)
+  updateGain()
+}
 
-    if(choiceCheck === "2:1" || choiceCheck === "1-18" || choiceCheck === "18-36"
-    || choiceCheck === "Even" || choiceCheck === "Odd" || choiceCheck === "Red"
-    ||choiceCheck === "Black") {
-      combi = 2
-    }else if(choiceCheck === "1st 12" || choiceCheck === "2nd 12" || choiceCheck === "3rd 12"){
-      combi = 3
+function getElementIndex (element) {
+  return Array.from(element.parentNode.children).indexOf(element);
+}
+
+function checkCotes(choiceCheck){
+  let cotes = null
+    if(choiceCheck === "PAIR" || choiceCheck === "IMPAIR" || choiceCheck === "ROUGE"
+    ||choiceCheck === "NOIR"){
+      cotes = 2
+    }else if(choiceCheck === "1-12" || choiceCheck === "13-24" || choiceCheck === "25-36"){
+      cotes = 3
+    }else if(choiceCheck === "A" || choiceCheck === "B" || choiceCheck === "C"
+    || choiceCheck === "D" || choiceCheck === "E" || choiceCheck === "F"){
+      cotes = 6
     }else{
-      combi = 36
+      cotes = 36
   }
-  return combi
+  return cotes
+}
+
+function updateCotes(target) {
+  if (target.length > 0) {
+    let cotesList = []
+    target.forEach(e => {cotesList.push(e.cotes)})
+    ticket.cotesMax = Math.max(...cotesList)
+    ticket.cotesMin = Math.min(...cotesList)
+    cotesMax.innerText = ticket.cotesMax
+    cotesMin.innerText = ticket.cotesMin
+  }else {
+    ticket.cotesMax = 0
+    ticket.cotesMin = 0
+    cotesMax.innerTchoiceListext = "-"
+    cotesMin.innerText = "-"
+  }
+}
+
+function updateCombi() {
+  ticket.combi = ticket.choiceList.length
+  combi.innerText = ticket.combi 
+}
+function updateGain() {
+  ticket.minGain = ticket.cotesMin * Number(ticket.mise)
+  ticket.maxGain = ticket.cotesMax * Number(ticket.mise)
+  maxGain.innerText = ticket.maxGain
+  minGain.innerText = ticket.minGain
 }

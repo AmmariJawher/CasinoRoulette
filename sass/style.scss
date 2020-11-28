@@ -1,6 +1,10 @@
 @charset "utf-8";
 @import "../node_modules/bulma/bulma.sass";
 
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
 body > h1{
   text-align: center;
 }
@@ -15,9 +19,8 @@ body > h1{
 #lost{
   color: red;
 }
-/***************************************
 
-*****************************************/
+/***************************************
 .play{
   display:grid;
   text-align: center;
@@ -33,9 +36,6 @@ body > h1{
   grid-gap: 5px;
 }
 
-.choice{
-  cursor: pointer;
-}
 
 .zero{
   grid-area: zero;
@@ -76,19 +76,63 @@ body > h1{
   grid-area: l;
 }
 
-.play section:hover{
-  background-color: rgb(251,186,22);
+*****************************************/
+
+
+.numGrid {
+  text-align: center;
+  font-size: 1.5em;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  max-height: 300px;
+  max-width: 350px;
 }
+
+.sectorGrid {
+  text-align: center;
+  font-size: 1.5em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  max-height: 300px;
+}
+
+.choice{
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-weight: normal;
+  background: linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(25,25,25,1) 35%, rgba(62,62,62,1) 100%);
+  border: rgb(15, 15, 15) solid 3px;
+  border-radius: 10px;
+}
+.choice:hover {
+  background: linear-gradient(0deg, rgb(14, 75, 189) 0%, rgb(24, 90, 214) 35%, rgb(66, 148, 255) 100%);
+  border-color: rgb(19, 52, 112);
+}
+
+
 
 /***************************************
 
 *****************************************/
 
 .num{
-  background-color: black;
-  color: white;
+  height: 50px;
+  width: 50px;
+  border-color: rgb(44, 44, 44);
+}
+.black{
+  border-color: rgb(44, 44, 44);
 }
 
-.r{
-  background-color: red;
+.zero{
+  border-color: rgb(39, 185, 95);
+}
+
+.r, .red{
+  border-color: rgb(255, 73, 73);
 }

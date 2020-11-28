@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="is-unselectable">
 
 <head>
   <meta charset="utf-8">
@@ -12,6 +12,7 @@
   <div class="">
     <div class="columns">
       <div class="column">
+        <!--
         <section class="play">
           <section class="choice zero">0</section>
           <section class="choice num r">3</section>
@@ -67,17 +68,89 @@
           <section class="choice odd" value="odd">Odd</section>
           <section class="choice last" value="end">18-36</section>
         </section>
+        -->
+        <section>
+
+        </section>
+        <section class="columns">
+          <div class="column numGrid m-2">
+            <div class="choice num r">1</div>
+            <div class="choice num">2</div>
+            <div class="choice num r">3</div>
+            <div class="choice num">4</div>
+            <div class="choice num r">5</div>
+            <div class="choice num">6</div>
+            <div class="choice num r">7</div>
+            <div class="choice num">8</div>
+            <div class="choice num r">9</div>
+            <div class="choice num">10</div>
+            <div class="choice num">11</div>
+            <div class="choice num r">12</div>
+            <div class="choice num">13</div>
+            <div class="choice num r">14</div>
+            <div class="choice num">15</div>
+            <div class="choice num r">16</div>
+            <div class="choice num">17</div>
+            <div class="choice num r">18</div>
+            <div class="choice num r">19</div>
+            <div class="choice num">20</div>
+            <div class="choice num r">21</div>
+            <div class="choice num">22</div>
+            <div class="choice num r">23</div>
+            <div class="choice num">24</div>
+            <div class="choice num r">25</div>
+            <div class="choice num">26</div>
+            <div class="choice num r">27</div>
+            <div class="choice num">28</div>
+            <div class="choice num">29</div>
+            <div class="choice num r">30</div>
+            <div class="choice num">31</div>
+            <div class="choice num r">32</div>
+            <div class="choice num">33</div>
+            <div class="choice num r">34</div>
+            <div class="choice num">35</div>
+            <div class="choice num r">36</div>
+          </div>
+          <div class="column">
+            <h4 class="subtitle is-5 my-1">COULEUR</h4>
+            <section class="sectorGrid">
+              <div class="choice black" value="black">NOIR</div>
+              <div class="choice red" value="red">ROUGE</div>
+              <div class="choice zero">VERT</div>
+            </section>
+            <h4 class="subtitle is-5 my-1">DOUZAINE</h4>
+            <section class="sectorGrid">
+              <div class="choice ratio" value="first">1-12</div>
+              <div class="choice ratioTwo" value="second">13-24</div>
+              <div class="choice ratioThree" value="third">25-36</div>
+            </section>
+            <h4 class="subtitle is-5 my-1">PAIR/IMPAIR</h4>
+            <section class="sectorGrid">
+              <div class="choice even" value="even">PAIR</div>
+              <div class="choice odd" value="odd">IMPAIR</div>
+            </section>
+            <h4 class="subtitle is-5 my-1">SECTOR</h4>
+            <section class="sectorGrid">
+              <div class="choice col" value="sectorA">A</div>
+              <div class="choice col" value="sectorB">B</div>
+              <div class="choice col" value="sectorC">C</div>
+              <div class="choice col" value="sectorD">D</div>
+              <div class="choice col" value="sectorE">E</div>
+              <div class="choice col" value="sectorF">F</div>
+            </section>
+          </div>
+        </section>
       </div>
       <div class="column is-one-quarter">
         <div class="tabs is-fullwidth">
           <ul>
-            <li class="is-active">
+            <li class="tablinks" onclick="openTab(event, 'Info')">
               <a>
                 <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-                <span>Pictures</span>
+                <span>Info</span>
               </a>
             </li>
-            <li>
+            <li class="tablinks" onclick="openTab(event, 'History')">
               <a>
                 <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                 <span>History</span>
@@ -85,79 +158,130 @@
             </li>
           </ul>
         </div>
-  
-        <section>
+        
+        <section class="is-size-7 tabcontent is-block" id="History">
           <div class="table-container">
             <table class="table is-fullwidth is-bordered is-striped is-narrow is-hoverable">
               <thead>
                 <tr>
-                  <th>Selection</th>
-                  <th>Multiplier</th>
                   <th></th>
+                  <th>Coupon Nr.</th>
+                  <th>Pari</th>
+                  <th>Paiement</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Num 3</td>
-                  <td>36</td>
-                  <td>X</td>
+                  <!-- TODO: Change Function Pramater with ID -->
+                  <td onclick="showModal('historyModal')">Info</td>
+                  <td>231223987231</td>
+                  <td>2 DT</td>
+                  <td>OUVERT</td>
                 </tr>
               </tbody>
             </table>
           </div>
           
-          <div class="betController tabs is-toggle is-centered">
+          <!-- Tickets History Details -->
+          <div class="modal" id="historyModal">
+            <div class="modal-background" onclick="hideModal('historyModal')"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Modal title</p>
+                <button class="delete" aria-label="close" onclick="hideModal('historyModal')"></button>
+              </header>
+              <section class="modal-card-body">
+                <!-- Content ... -->
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+              </footer>
+            </div>
+          </div>
+        </section>
+
+        <section class="is-size-7 tabcontent is-block" id="Info">
+          <div class="table-container">
+            <table class="table is-fullwidth is-bordered is-striped is-narrow is-hoverable">
+              <thead>
+                <tr>
+                  <th>Selection</th>
+                  <th>Coutes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <!-- Enter is considred a data in html childnode function so avoid using enter-->
+              <tbody id="Selection"></tbody>
+            </table>
+          </div>
+          
+          <div class="betController tabs is-toggle is-centered is-small is-fullwidth">
             <ul>
               <li class="addToBet">
                 <a>
-                  <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
                   <span>1</span>
                 </a>
               </li>
               <li class="addToBet">
                 <a>
-                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                   <span>5</span>
                 </a>
               </li>
               <li class="addToBet">
                 <a>
-                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                   <span>10</span>
                 </a>
               </li>
               <li class="addToBet">
                 <a>
-                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                   <span>20</span>
                 </a>
               </li>
               <li class="addToBet">
                 <a>
-                  <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
                   <span>Effacer</span>
                 </a>
               </li>
             </ul>
           </div>
+
           <div class="table-container">
-            <table class="table is-fullwidth is-bordered is-striped is-narrow is-hoverable">
+            <table class="table is-fullwidth is-bordered is-striped is-narrow">
               <thead>
                 <tr>
                   <th>Combi</th>
-                  <th>Max Gain</th>
-                  <th>Min Gain</th>
+                  <th>Max</th>
+                  <th>Min</th>
+                  <th>Mise</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Num 3</td>
-                  <td>36</td>
-                  <td>X</td>
+                  <td id="combi">0</td>
+                  <td id="cotesMax">-</td>
+                  <td id="cotesMin">-</td>
+                  <td id="mise">1</td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <table class="table is-fullwidth has-background-grey-lighter is-narrow">
+            <thead>
+              <tr>
+                <th>Gain potential MAX</th>
+                <td id="maxGain">0</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Gain potential MIN</th>
+                <td id="minGain">0</td>
+              </tr>
+            </tbody>
+          </table>
+
           <input type="button" value="spin" id="spin" />
           
           <div class="table-container">
@@ -165,11 +289,11 @@
               <tbody>
                 <tr>
                   <th>Mise totale:</th>
-                  <td id="bet">1</td>
+                  <td id="mise">1</td>
                 </tr>
                 <tr>
                   <th>Gain total Max:</th>
-                  <td id="won">36</td>
+                  <td class="maxGain">36</td>
                 </tr>
               </tbody>
             </table>
