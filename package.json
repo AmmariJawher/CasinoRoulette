@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron . ",
     "css-build": "node-sass --omit-source-map-url sass/style.scss public/css/style.css",
+    "rt": "node-sass --omit-source-map-url sass/roulette.scss public/css/roulette.css",
     "css-watch": "npm run css-build -- --watch"
   },
   "keywords": [],

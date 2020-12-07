@@ -12,6 +12,8 @@ let choiceCheck= ""
 let choiceIndex= null
 
 let ticket = {
+  eventName: "Spin&Win",
+  eventResult: null,
   combi: null,
   minGain: null,
   maxGain: null,
@@ -19,6 +21,8 @@ let ticket = {
   cotesMax: null,
   status: null,
   mise: 1,
+  TicketWinSum: null,
+  eventTime: null,
   choiceList: []
 }
  
@@ -82,7 +86,9 @@ for(let i = 0; i<choice.length; i++){
     choiceCheck = choice[i].textContent
     ticket.choiceList.push({
       choice: choice[i].textContent,
-      cotes: checkCotes(choiceCheck)
+      cotes: checkCotes(choiceCheck),
+      status: null,
+      selectionWinSum: 0
     })
     updateCombi()
     updateCotes(ticket.choiceList)
