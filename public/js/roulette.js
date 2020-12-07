@@ -1,18 +1,21 @@
 const centerColor = document.getElementById("sawCenterColor");
 const centerText = document.getElementById("sawCenterText");
 const timerText = document.getElementsByClassName("saw-next-game-counter")
+const sawSector = document.getElementById("sawSector")
 
 const wheel = document.getElementById("saw-wheel-bg");
 
 
-var options = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
+var options = [0,26,3,35,12,28,7,29,18,22,9,31,14,20,1,33,16,24,5,10,23,8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32,0];
 
 var spinTimeout = null
 
-var spinAngle = 10
+let spinAngle = 10
 
+let spinAngleStart = 0;
 let spinDest = 0
 let spinDestTotal = 0
+let target = 8
 
 let choiceCheck= ""
 let choiceIndex= null
@@ -20,8 +23,6 @@ let choiceStyle = ""
 
 let timer = 3000;
 let shouldCount = true;
-
-let results = []
 
 function byte2Hex(n) {
   var nybHexString = "0123456789ABCDEF";
@@ -60,67 +61,40 @@ function getColor(item, maxitem) {
 }
 
 function spin() {
-  //spinAngleStart = Math.random() * 10 + 10;
-  spinDest = 0;
-  let prize = 8
-  spinDestTotal = ((prize - 1) * 9.729) + 360 * 5;
+  //sawSector.style.display = "none"
+  spinAngleStart = 360 * 4 // only for easeOut function to work
+  spinAngle = 10
+  spinDest = 0; 
+  target = 1
+  spinDestTotal = 360 * 15; // aka Spining Speed
   rotateWheel(wheel);
 }
 
 const rotateWheel = function() {
-  
-  /*wheel.style.transition = 'none'
-  wheel.style.transform = 'rotate(0)'
-  // Generate a number between 1 and 6
-  let prize = (Math.floor(Math.random() * 6)) + 1;
-  // Spin to the angle of the segment based on the random number
-  let segmentAngle = ((prize - 1) * -9.729);
-  // Add on 3 full spins
-  let randomSpins = 5
-  segmentAngle += randomSpins * 360;
-  
-
-  wheel.style.transition = 'all 5s ease-out'
-
-  wheel.style.webkitTransform = 'rotate('+segmentAngle+'deg)'; 
-  wheel.style.mozTransform    = 'rotate('+segmentAngle+'deg)'; 
-  wheel.style.msTransform     = 'rotate('+segmentAngle+'deg)'; 
-  wheel.style.oTransform      = 'rotate('+segmentAngle+'deg)'; 
-  wheel.style.transform       = 'rotate('+segmentAngle+'deg)';
-  
-  // Display the result
-  shouldCount = true
-  
-  //document.getElementById("result").innerHTML = "Congrats you got " + prize;
-  */
- spinDest += 4;
+ spinDest += 20; // aka Spin Duration
 
  if(spinDest >= spinDestTotal) {
    stopRotateWheel();
    return;
  }
- let spinAngle = 0 + easeOut2(spinDest, 0, 0,spinDestTotal);
+ spinAngle = ((target - 1) * 9.72972972973) + easeOut(spinDest, 0, spinAngleStart,spinDestTotal);
  wheel.style.rotate = String(spinAngle+"deg")
- //startAngle += (spinAngle * Math.PI / 180);
+
+ let text = options[checkIndex()]
+ centerColor.style.fill = getColor(text)
+ centerText.innerHTML = text
+
  spinTimeout = setTimeout('rotateWheel()', 30);
 }
 
 function stopRotateWheel() {
   clearTimeout(spinTimeout);
   spinDest = 0
-  //var degrees = startAngle * 180 / Math.PI + 90;
-  //var arcd = arc * 180 / Math.PI;
-  //var index = Math.floor((360 - degrees % 360) / arcd);
-  //var text = options[index]
+  sawSector.style.display = "block"
+  document.getElementById("sawSectorValue").innerHTML = options[checkIndex()]
 }
 
-function easeOut(actualDest, totalDest) {
-  let k = Number(actualDest/totalDest)
-  result = 1 - Math.pow(1-k, 1.675)
-  return result
-}
-
-function easeOut2(t, b, c, d) {
+function easeOut(t, b, c, d) {
   var ts = (t/=d)*t;
   var tc = ts*t;
   return b+c*(tc + -3*ts + 3*t);
@@ -130,9 +104,9 @@ function checkDegree(k) {}
 
 
 function checkIndex() {
-  var degrees = startAngle * 180 / Math.PI + 90;
-  var arcd = arc * 180 / Math.PI;
-  var index = Math.floor((360 - degrees % 360) / arcd);
+  let degrees = (spinAngle%360)/9.72972972973;
+  let index = Math.round(degrees)
+  console.log(degrees, index);
   return index
 }
 
