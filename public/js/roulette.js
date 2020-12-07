@@ -2,6 +2,9 @@ const centerColor = document.getElementById("sawCenterColor");
 const centerText = document.getElementById("sawCenterText");
 const timerText = document.getElementsByClassName("saw-next-game-counter")
 
+const wheel = document.getElementById("saw-wheel-bg");
+
+
 var options = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26];
 
 var spinTimeout = null
@@ -57,15 +60,14 @@ function getColor(item, maxitem) {
 }
 
 function spin() {
-  const wheel = document.getElementById("saw-wheel-bg");
   //spinAngleStart = Math.random() * 10 + 10;
   spinDest = 0;
   let prize = 8
-  spinDestTotal = ((prize - 1) * -9.729);
+  spinDestTotal = ((prize - 1) * 9.729) + 360 * 5;
   rotateWheel(wheel);
 }
 
-const rotateWheel = function(element) {
+const rotateWheel = function() {
   
   /*wheel.style.transition = 'none'
   wheel.style.transform = 'rotate(0)'
@@ -91,21 +93,21 @@ const rotateWheel = function(element) {
   
   //document.getElementById("result").innerHTML = "Congrats you got " + prize;
   */
- spinDest += 30;
- /*
+ spinDest += 4;
+
  if(spinDest >= spinDestTotal) {
    stopRotateWheel();
    return;
  }
- */
- let spinAngle = spinDest * easeOut(spinDest, spinDestTotal);
- element.style.rotate = String(spinAngle+"deg")
+ let spinAngle = 0 + easeOut2(spinDest, 0, 0,spinDestTotal);
+ wheel.style.rotate = String(spinAngle+"deg")
  //startAngle += (spinAngle * Math.PI / 180);
  spinTimeout = setTimeout('rotateWheel()', 30);
 }
 
 function stopRotateWheel() {
   clearTimeout(spinTimeout);
+  spinDest = 0
   //var degrees = startAngle * 180 / Math.PI + 90;
   //var arcd = arc * 180 / Math.PI;
   //var index = Math.floor((360 - degrees % 360) / arcd);
@@ -116,6 +118,12 @@ function easeOut(actualDest, totalDest) {
   let k = Number(actualDest/totalDest)
   result = 1 - Math.pow(1-k, 1.675)
   return result
+}
+
+function easeOut2(t, b, c, d) {
+  var ts = (t/=d)*t;
+  var tc = ts*t;
+  return b+c*(tc + -3*ts + 3*t);
 }
 
 function checkDegree(k) {}

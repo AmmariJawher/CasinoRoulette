@@ -12,8 +12,7 @@ var arc = Math.PI / (options.length / 2);
 var spinTimeout = null;
 
 var spinArcStart = 10;
-var spinTime = 0;
-var spinTimeTotal = 0;
+var spinTime = 0
 
 var ctx;
 
