@@ -372,7 +372,7 @@ wv-core-channels-list-channelhtml {
 }
 
 @font-face {
-  font-family: Roboto Condensed;
+  font-family: "Roboto Condensed";
   font-weight: 700;
-  src: local("RobotoCondensed-Bold"), url(./fonts/RobotoCondensed-Bold.4b8b4b377e8cb35.ttf) format("truetype")
+  src: local("RobotoCondensed-Bold"), url(../public//fonts/roboto-condensed.bold.ttf) format("truetype")
 }

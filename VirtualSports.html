@@ -4,8 +4,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <!-- <link rel="stylesheet" href="public/css/roulette.css"> -->
-
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Virtual Sports</title>
@@ -13,32 +11,23 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1 initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css"
-        href="./Virtual Sports_files/styles-bundle.f0fc78f43b7dcf7c9a8059e008a70843.css">
-    <link href="./Virtual Sports_files/overlays-bundle.7e24106306ab282c0f66648866790392.css" rel="stylesheet"
-        type="text/css">
-        <!--
-            <script src="./Virtual Sports_files/globalbet.min.js.téléchargement"></script>
-        -->
-    <style type="text/css">
 
-    </style>
-    <style type="text/css">
-    </style>
-    <style type="text/css">
-    </style>
-    <style type="text/css">
-
-    </style>
-    <script src="./Virtual Sports_files/i18n_fr_FR.e471a27d4916b4b4471ff8988e94228a.js.téléchargement"></script>
+    <link rel="stylesheet" type="text/css" href="./Virtual Sports_files/styles-bundle.css">
+    <link href="./Virtual Sports_files/overlays-bundle.css" rel="stylesheet" type="text/css">            
     <style type="text/css">
         .customer-logo {
             background-color: transparent !important;
             background-image: url(/engine/display/resource/1719.svg) !important;
             background-size: contain !important;
             background-repeat: no-repeat !important;
+        }
+        @font-face {
+            font-family: "Roboto Condensed";
+            src: url("./public/fonts/roboto-condensed.regular.ttf");
+        }
+        @font-face {
+            font-family: "gbdigits";
+            src: url("./public/fonts/digital-dismay.otf");
         }
     </style>
     <link rel="stylesheet" type="text/css" href="./Virtual Sports_files/tv.f759a8cd4f7ee2feb0c91af068b7a053.css">
@@ -236,7 +225,7 @@
                                         <div class="saw-history-header">
                                             <div>HISTOIRE</div>
                                         </div>
-                                        <div class="saw-history-col">
+                                        <div id="event-history" class="saw-history-col">
                                             <div class="saw-history-row saw-history-row_bg">
                                                 <div class="saw-history-id" data-animation="">
                                                     <span>#250921420</span>
@@ -312,11 +301,9 @@
                                         <div>(LES 120 DERNIERS TOURS)</div>
                                     </div>
                                     <div class="saw-statistics-table">
-                                        <div class="saw-history-row">
+                                        <div id="number-stat" class="saw-history-row">
                                             <div class="saw-history-col">
                                                 <div class="saw-history-row saw-history-row_bg">
-
-
                                                     <div class="saw-history-block saw-history-block-red saw-history-color" data-animation="false">
                                                         <span>1</span>
                                                     </div>
@@ -325,8 +312,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="saw-history-row saw-history-row_bg">
-
-
                                                     <div class="saw-history-block saw-history-block-black saw-history-color" data-animation="false">
                                                         <span>2</span>
                                                     </div>
@@ -437,8 +422,6 @@
                                             </div>
                                             <div class="saw-history-col">
                                                 <div class="saw-history-row saw-history-row_bg">
-
-
                                                     <div class="saw-history-block saw-history-block-black saw-history-color" data-animation="false">
                                                         <span>13</span>
                                                     </div>
@@ -686,7 +669,7 @@
                                             <div class="saw-history-block saw-history-block-green saw-history-color" data-animation="false">
                                                 <span>0</span>
                                             </div>
-                                            <div class="saw-history-block" data-animation=""><span>7</span>
+                                            <div id="zero" class="saw-history-block" data-animation=""><span>7</span>
                                             </div>
                                         </div>
                                     </div>
@@ -701,17 +684,17 @@
 
 
                                         <div class="saw-history-block saw-history-block-red " data-animation="false">
-                                            <span>60</span>
+                                            <span class="color-stat">0</span>
                                         </div>
 
 
                                         <div class="saw-history-block saw-history-block-black " data-animation="false">
-                                            <span>53</span>
+                                            <span class="color-stat">0</span>
                                         </div>
 
 
                                         <div class="saw-history-block saw-history-block-green " data-animation="false">
-                                            <span>7</span>
+                                            <span class="color-stat">0</span>
                                         </div>
 
                                     </div>
@@ -726,21 +709,21 @@
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">1-12</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>36</span>
+                                                <span class="twelves-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">13-24</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>41</span>
+                                                <span class="twelves-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">25-36</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>36</span>
+                                                <span class="twelves-stat">0</span>
                                             </div>
 
                                         </div>
@@ -756,21 +739,21 @@
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">A</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>16</span>
+                                                <span class="section-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">B</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>15</span>
+                                                <span class="section-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">C</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>22</span>
+                                                <span class="section-stat">0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -778,21 +761,21 @@
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">D</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>20</span>
+                                                <span class="section-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">E</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>24</span>
+                                                <span class="section-stat">0</span>
                                             </div>
 
                                         </div>
                                         <div class="saw-history-row">
                                             <div class="saw-history-block saw-history-block-neutral">F</div>
                                             <div class="saw-history-count" data-animation="">
-                                                <span>16</span>
+                                                <span class="section-stat">0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -870,7 +853,8 @@
                     
                 </div></div>
 </body>
-<link rel="stylesheet" href="/public/css/roulette.css">
-<script src="public/js/roulette.js"></script>
+
+<script src="./node_modules/axios/dist/axios.min.js"></script>
+<script src="js/roulette.js"></script>
 
 </html>

@@ -6659,7 +6659,7 @@ body {
 }
 
 #saw-wheel-bg {
-  background-image: url(../images/wheel.png);
+  background-image: url(../public/images/wheel.png);
   background-repeat: no-repeat;
   display: block;
   position: absolute;
@@ -6668,9 +6668,9 @@ body {
   top: 0;
   bottom: 0;
   background-position: 50%;
-  scale: 0.929;
+  scale: 1;
   z-index: -1;
-  background-size: 81%;
+  background-size: 72%;
 }
 
 #saw-wheel-sectors {
@@ -6723,7 +6723,7 @@ body {
 }
 
 .saw-container[data-style=wood] {
-  background: radial-gradient(circle at 46%, rgba(87, 87, 81, 0) 0, #000 80%), url(../images/grid.svg) 10px 20px/80px 80px;
+  background: radial-gradient(circle at 46%, rgba(87, 87, 81, 0) 0, #000 80%), url(../public/images/grid.svg) 10px 20px/80px 137px;
 }
 
 .saw-bold-item {
@@ -6844,15 +6844,15 @@ body {
 
 .saw .saw-wheel-container-inner>svg#sawSector #sawSectorValue {
   fill: #fff;
-  font-family: Roboto Condensed;
-  font-size: 60px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 53px;
   font-weight: 700;
   text-align: center;
-  text-shadow: 0 0 1px #000, 0 0 5px #000
+  /*! text-shadow: 0 0 1px #000, 0 0 5px #000 */
 }
 
 .saw .saw-wheel-container-inner>svg#sawSector[data-color=black] #sawSectorColor {
-  fill: #000
+  fill: #f76924;
 }
 
 .saw .saw-wheel-container-inner>svg#sawSector[data-color=red] #sawSectorColor {
@@ -6869,6 +6869,10 @@ body {
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
   display: none;
+  padding-right: 24px;
+  /*! /*! padding-bottom: 45px; */ */
+4px;
+  /*! padding-bottom: 110px; */
 }
 
 .saw .saw-wheel-container-inner>svg#sawSector[data-finish=progress] {
@@ -7510,7 +7514,7 @@ body {
   position: relative;
   border-radius: 20px;
   background: linear-gradient(270deg, rgba(255, 0, 0, .7) 0, red 45%, rgba(255, 0, 0, .3));
-  transition: height .9s linear
+  transition: height 1s linear;
 }
 
 @keyframes fillingBar {
@@ -11746,19 +11750,18 @@ body {
 @font-face {
   font-family: Roboto Condensed;
   font-weight: 400;
-  src: local("RobotoCondensed-Regular"), url(./overlays/fonts/RobotoCondensed-Regular.b0b1845ecce8ab6.ttf) format("truetype")
+  src: local("RobotoCondensed-Regular"), url(../public/fonts/roboto-condensed.regular.ttf) format("truetype")
 }
 
 @font-face {
   font-family: Roboto Condensed;
   font-weight: 700;
-  src: local("RobotoCondensed-Bold"), url(./overlays/fonts/RobotoCondensed-Bold.4b8b4b377e8cb35.ttf) format("truetype")
+  src: local("RobotoCondensed-Bold"), url(../public/fonts/roboto-condensed.bold.ttf) format("truetype")
 }
 
 @font-face {
   font-family: gbdigits;
-  src: url(./overlays/fonts/gbdigits.8da3949e51b954e.eot);
-  src: url(./overlays/fonts/gbdigits.8da3949e51b954e.eot?#iefix) format("embedded-opentype"), url(./overlays/fonts/gbdigits.b9f6ef88dcf7a61.woff) format("woff"), url(./overlays/fonts/gbdigits.5ec555d85ce362f.ttf) format("truetype");
+  src: url(./overlays/fonts/gbdigits.ttf);
   font-weight: 400;
   font-style: normal
 }
