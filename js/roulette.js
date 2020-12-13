@@ -9,12 +9,23 @@ function getAllEvents() {
   .catch(err => {console.log(err)})
 }
 
-function getEvent() {
-  let lastEvent = {}
+function getEvent(pram) {
   axios.get('http://localhost:8000/event')
-  .then(res => {lastEvent = res})
+  .then(res => {lastEventNum(res.data, pram)})
   .catch(err => {console.log(err)})
-  return lastEvent
+}
+
+function lastEventNum(data, pram) {
+  const eventCounter = document.getElementById("event")
+  let currentEvent = data.number+1
+  eventCounter.firstElementChild.innerText = "ÉVÉNEMENT: "+(currentEvent+1)
+  let options = [0,26,3,35,12,28,7,29,18,22,9,31,14,20,1,33,16,24,5,10,23,8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32,0];
+  axios.post('http://localhost:8000/event', {
+    number: currentEvent,
+    result: options[pram-1]
+  })
+  .then(res => {getAllEvents()})
+  .catch(err => {console.log(err)})
 }
 
 function postEvent() {
@@ -59,6 +70,10 @@ function updateStats(data) {
   // Colors
   const colorStat = document.getElementsByClassName("color-stat")
   const black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+  const red = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+  colorStat[0].innerHTML = 0
+  colorStat[1].innerHTML = 0
+  colorStat[2].innerHTML = 0
 
   // Twelves
   const twelveStat = document.getElementsByClassName("twelves-stat")
@@ -94,36 +109,36 @@ function updateStats(data) {
     }
     
     // Update Colors
-    if (index == 0) {
-      colorStat[0].innerHTML = Number(colorStat[0].innerHTML+element)
+    if (red.includes(index)) {
+      colorStat[0].innerHTML = Number(colorStat[0].innerHTML)+element
     } else if(black.includes(index)) {
-      colorStat[1].innerHTML = Number(colorStat[1].innerHTML+element)
+      colorStat[1].innerHTML = Number(colorStat[1].innerHTML)+element
     } else {
-      colorStat[2].innerHTML = Number(colorStat[2].innerHTML+element)
+      colorStat[2].innerHTML = Number(colorStat[2].innerHTML)+element
     }
 
     // Update Twelves
     if (colOne.includes(index)) {
-      twelveStat[0].innerHTML = Number(twelveStat[0].innerHTML+element)
+      twelveStat[0].innerHTML = Number(twelveStat[0].innerHTML)+element
     } else if(colTwo.includes(index)) {
-      twelveStat[1].innerHTML = Number(twelveStat[1].innerHTML+element)
+      twelveStat[1].innerHTML = Number(twelveStat[1].innerHTML)+element
     } else if (colThree.includes(index)){
-      twelveStat[2].innerHTML = Number(twelveStat[2].innerHTML+element)
+      twelveStat[2].innerHTML = Number(twelveStat[2].innerHTML)+element
     }
 
     // Update Sections
     if (sectionA.includes(index)) {
-      sectionStat[0].innerHTML = Number(sectionStat[0].innerHTML+element)
+      sectionStat[0].innerHTML = Number(sectionStat[0].innerHTML)+element
     } else if(sectionB.includes(index)) {
-      sectionStat[1].innerHTML = Number(sectionStat[1].innerHTML+element)
+      sectionStat[1].innerHTML = Number(sectionStat[1].innerHTML)+element
     } else if (sectionC.includes(index)){
-      sectionStat[2].innerHTML = Number(sectionStat[2].innerHTML+element)
+      sectionStat[2].innerHTML = Number(sectionStat[2].innerHTML)+element
     } else if (sectionD.includes(index)){
-      sectionStat[3].innerHTML = Number(sectionStat[3].innerHTML+element)
+      sectionStat[3].innerHTML = Number(sectionStat[3].innerHTML)+element
     } else if (sectionE.includes(index)){
-      sectionStat[4].innerHTML = Number(sectionStat[4].innerHTML+element)
+      sectionStat[4].innerHTML = Number(sectionStat[4].innerHTML)+element
     } else if (sectionF.includes(index)){
-      sectionStat[5].innerHTML = Number(sectionStat[5].innerHTML+element)
+      sectionStat[5].innerHTML = Number(sectionStat[5].innerHTML)+element
     }
    })
   const h = document.getElementsByClassName("")
@@ -138,7 +153,6 @@ let spinAngle = 10
 let spinAngleStart = 0;
 let spinDest = 0
 let spinDestTotal = 0
-let target = Math.floor(Math.random() * 36)
 
 const event = {}
 // Result
@@ -181,17 +195,17 @@ setInterval(function() {
 }, 1000);
 
 function RGB2Color(r,g,b) {
-	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+  return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
 }
 
 function getColor(item) {
   const black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
   if(item === 0){
-      return RGB2Color(33, 154, 0)
+    return RGB2Color(33, 154, 0)
   }else if(black.includes(item)){
-      return RGB2Color(15, 15, 15)
+    return RGB2Color(15, 15, 15)
   }else{
-      return RGB2Color(235, 35, 35);
+    return RGB2Color(235, 35, 35);
   }
 }
 
@@ -204,30 +218,30 @@ function spin() {
   rotateWheel(wheel);
 }
 
+let target = Math.floor(Math.random() * 36)
 const rotateWheel = function() {
- spinDest += 20; // aka Spin Duration
+  spinDest += 20; // aka Spin Duration
 
- if(spinDest >= spinDestTotal) {
-   stopRotateWheel();
-   return;
- }
- spinAngle = ((target - 1) * 9.72972972973) + easeOut(spinDest, 0, spinAngleStart,spinDestTotal);
- wheel.style.rotate = String(spinAngle+"deg")
+  if(spinDest >= spinDestTotal) {
+    stopRotateWheel(target);
+    return;
+  }
+  spinAngle = ((target - 1) * 9.72972972973) + easeOut(spinDest, 0, spinAngleStart,spinDestTotal);
+  wheel.style.rotate = String(spinAngle+"deg")
 
- let text = options[checkIndex()]
- centerColor.style.fill = getColor(text)
- centerText.innerHTML = text
+  let text = options[checkIndex()]
+  centerColor.style.fill = getColor(text)
+  centerText.innerHTML = text
 
- spinTimeout = setTimeout('rotateWheel()', 30);
+  spinTimeout = setTimeout('rotateWheel()', 30);
 }
 
-function stopRotateWheel() {
+function stopRotateWheel(target) {
   clearTimeout(spinTimeout);
   spinDest = 0
   sawSector.style.display = "block" // Show results
   document.getElementById("sawSectorValue").innerHTML = options[checkIndex()]
-
-  axios.post
+  getEvent(target)
 }
 
 function easeOut(t, b, c, d) {

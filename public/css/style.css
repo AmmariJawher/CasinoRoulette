@@ -7712,27 +7712,32 @@ body > h1 {
 /***************************************
 
 *****************************************/
-#won {
-  color: green; }
-
-#lost {
-  color: red; }
-
-/***************************************
-.play{
-  display:grid;
+.play {
+  display: grid;
   text-align: center;
   font-size: 1.5em;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
-  grid-template-areas:
-    "zero three six nine twelve fifteen eighteen tone tfour tseven thirty ththree thsix fcol"
-    "zero two five eight eleven fourteen seteen twenty twthree twsix twnine thtwo thfive scol"
-    "zero one four sev ten thteen sixteen nineteen twtwo twfive tweight thone thfour tcol"
-    ". f f f f s s s s t t t t ."
-    ". b b e e r r bl bl o o l l .";
-  grid-gap: 5px;
-}
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  max-height: 300px; }
+
+.win-choice {
+  cursor: pointer;
+  color: white;
+  font-weight: normal;
+  background: linear-gradient(180deg, #141414 0%, #191919 35%, #3e3e3e 100%);
+  border: #0f0f0f solid 3px;
+  border-radius: 10px; }
+
+.win-choice:hover {
+  background: linear-gradient(0deg, #0e4bbd 0%, #185ad6 35%, #4294ff 100%);
+  border-color: #133470; }
+
+#admin-modal-card {
+  width: 1100px; }
+
+/***************************************
 
 
 .zero{

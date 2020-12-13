@@ -6659,7 +6659,7 @@ body {
 }
 
 #saw-wheel-bg {
-  background-image: url(../public/images/wheel.png);
+  background-image: url(../public/images/saw-wheel.svg);
   background-repeat: no-repeat;
   display: block;
   position: absolute;
@@ -6668,13 +6668,14 @@ body {
   top: 0;
   bottom: 0;
   background-position: 50%;
-  scale: 1;
-  z-index: -1;
+  scale: 0.976;
+  /*! z-index: -3; */
   background-size: 72%;
 }
 
 #saw-wheel-sectors {
-  display: none
+  /*! display: none; */
+  /*! z-index: 2; */
 }
 
 #saw-wheel-sectors.wood {
@@ -6683,8 +6684,18 @@ body {
 }
 
 #saw-wheel-sectors.chrome {
-  background-image: url(./overlays/images/images/saw-wheel-sectors-chrome.e40d3babb0d6efc.svg);
-  background-repeat: no-repeat
+  background-image: url(../public/images/saw-wheel-sectors-wood.svg);
+  background-repeat: no-repeat;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-position: 50%;
+  scale: 0.976;
+  /*! z-index: -3; */
+  background-size: 72%;
 }
 
 #saw-wheel-sectors.carpet {
@@ -6769,7 +6780,7 @@ body {
   top: 20px;
   bottom: 20px;
   right: 390px;
-  z-index: 10
+  z-index: 10;
 }
 
 .saw .saw-wheel-container-border {
@@ -6781,7 +6792,7 @@ body {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
-  z-index: -1;
+  z-index: -2;
   justify-content: center;
   align-content: center;
   filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 5px #000) drop-shadow(0 0 10px #000);
@@ -6794,6 +6805,8 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   z-index: -4;
+  height: 1100px;
+  width: 1100px;
 }
 
 .saw .saw-wheel-container-canvas {
@@ -7003,19 +7016,21 @@ body {
 }
 
 .saw .saw-wheel-container[data-style=wood] .saw-wheel-container-border {
-  background-image: url(../images/wheel.svg);
+  background-image: url(../public/images/border-wood.png);
 }
 
 .saw .saw-wheel-container[data-style=wood] .saw-wheel-container-border-background {
   background-image: linear-gradient(45deg, #6f520e 30%, #ddd586 46%, #fff6ac 48%, #fff6ac 54%, #ddd586 56%, #6f520e 70%);
+  /*! height: 1100px; */
+  /*! width: 1100px; */
 }
 
 .saw .saw-wheel-container[data-style=wood] .saw-wheel-container-inner>svg#sawBorder #sawInnerBorder {
-  fill: #f7db61
+  fill: #f7db61;
 }
 
 .saw .saw-wheel-container[data-style=wood] .saw-wheel-container-pointer-value {
-  background-image: url(./overlays/images/pointers/wheel-gold.0b38ed83b396dc4.png)
+  background-image: url(../public/images/wheel-wood.png);
 }
 
 .saw .saw-wheel-container[data-style=wood] .saw-wheel-container-pointer-arrow svg #sawArrow {
@@ -7439,7 +7454,7 @@ body {
   left: 40px;
   width: 315px;
   height: 255px;
-  background: url(./overlays/images/images/saw-logo.f8c1ded0e583d10.svg) no-repeat !important;
+  background: url(../public/images/saw-logo.svg) no-repeat !important;
   background-position: 50%
 }
 
@@ -12380,7 +12395,7 @@ body {
 }
 
 .spinwin .gameIcon {
-  background: transparent url(./overlays/images/icons/icon-spinwin.32ba9d1ae63d5f4.svg) no-repeat
+  /*! background: url(../public/images/icon-spinwin.svg) no-repeat; */
 }
 
 .livespin .gameIcon {
