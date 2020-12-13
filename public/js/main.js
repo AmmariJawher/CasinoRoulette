@@ -98,7 +98,6 @@ function showModal(idName, id) {
 
 // Modal Update
 function updateModal(ticket) {
-  console.log(ticket);
   const modalInfo = document.getElementsByClassName("ticket-info")
   modalInfo[0].innerHTML = ticket.fakeId
   modalInfo[1].innerHTML = ticket.mise
@@ -228,13 +227,36 @@ function updateGain() {
 }
 
 
-// 
+//Post ticket in database after getting last ticket ID and adding 1 
 const print = document.getElementById("print")
-print.addEventListener("click", 
+print.addEventListener("click",
 function approveTicket() {
   axios.get('http://localhost:8000/event')
   .then(res => {updateTicket(res.data.number); })
   .catch(err => {console.log(err)})
+  
+  // Print Window
+  var frog = window.open("","wildebeast","width=300,height=500,scrollbars=1,resizable=1")
+  
+  var html = '<!DOCTYPE html><html lang="en"><head><link rel="stylesheet" href="printStyle.css"><script src="JsBarcode.all.min.js"></script></head><body><button id="btnPrint" class="hidden-print">Print</button><div class="ticket"><div class="centered"><h2>Logo</h2>'+
+        '<span id="adresse">Adrese line</span><span> - </span><span id="TimeDate"></span>'+
+        '<br><span>Ticket</span><span id="TicketNumber">'+ticket.fakeId+'</span>'+
+        '</div><div id="Bar" class="centered"><svg id="barcode"></svg></div><div class="grid-container"><div class="grid-item">'+
+        '<p></p><span>GR: '+ticket.gr+'</span><p>Gain min/max</p></div><div class="grid-item right"><p></p>'+
+        '<span>'+ticket.combi+' X '+ticket.gr+' TND  = '+ticket.mise+' TND</span>'+
+        '<p></p><span>'+ticket.minGain+' / '+ticket.maxGain+' TND</span></div></div><div class="lineDashed"></div>'
+  
+        ticket.choiceList.forEach((e, i) => {
+          html += ' <div><div><p class="gameTitle">'+Math.floor(Math.random() * 1000000000)+'   Spin&Win</p><div class="grid-container"><div class="grid-item">'+
+              '<p class="gameInfo">19:32 '+ticket.choiceList[i].choice+'</p></div><div class="grid-item right"><p>'+ticket.choiceList[i].cotes+'</p></div></div><div class="lineDotted"></div></div></div>'
+        })
+  
+        html += '</div><p></p><div class="grid-container"><div class="grid-item"><b><p>Mise Totale</p>'+
+            '<p>Gain min/max</p></b></div><div class="grid-item right"><b><p></p><span id="MiseTotale">'+ticket.mise+' TND</span><p></p>'+
+            '<span>'+ticket.minGain+' / '+ticket.maxGain+' TND</span></b></div></div></div><script src="print.js"></script></body></html>'
+  frog.document.open()
+  frog.document.write(html)
+  frog.document.close()
 })
 
 function getLastTicketFakeID() {

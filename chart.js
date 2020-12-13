@@ -166,9 +166,14 @@ function updateStats(data) {
 const winChoice = document.querySelectorAll(".win-choice");
 for (let i = 0; i < winChoice.length; i++) {
     winChoice[i].addEventListener("click", function (element) {
-        winChoice = winChoice[i].textContent;
+        winningResult = winChoice[i].textContent;
+        console.log(winningResult);
         axios.get('http://localhost:8000/event')
-        .then(res => {console.log(res.data)})
+        .then(res => {
+            axios.put('http://localhost:8000/event', {number: res.data.number,result: winningResult})
+            .then(res => {console.log(res)})
+            .catch(err => {console.log(err)})
+        })
         .catch(err => {console.log(err)})
     })
 }

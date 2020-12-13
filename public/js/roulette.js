@@ -1,7 +1,7 @@
 const centerColor = document.getElementById("sawCenterColor");
 const centerText = document.getElementById("sawCenterText");
 const sawSector = document.getElementById("sawSector")
-const wheel = document.getElementById("wheel");
+const wheel = document.getElementById("saw-wheel-bg");
 
 function getAllEvents() {
   axios.get('http://localhost:8000/events')
@@ -9,6 +9,8 @@ function getAllEvents() {
   .catch(err => {console.log(err)})
 }
 
+
+// We take the last event and post our event data / number
 function getEvent(pram) {
   axios.get('http://localhost:8000/event')
   .then(res => {lastEventNum(res.data, pram)})
@@ -16,13 +18,13 @@ function getEvent(pram) {
 }
 
 function lastEventNum(data, pram) {
-  const eventCounter = document.getElementById("event")
+  const eventCounter = document.getElementById("event-counter")
   let currentEvent = data.number+1
-  eventCounter.firstElementChild.innerText = "ÉVÉNEMENT: "+(currentEvent+1)
+  eventCounter.innerText = (currentEvent+1)
   let options = [0,26,3,35,12,28,7,29,18,22,9,31,14,20,1,33,16,24,5,10,23,8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32,0];
   axios.post('http://localhost:8000/event', {
     number: currentEvent,
-    result: options[pram-1]
+    result: options[pram-1] // 30sec before spin get result from database
   })
   .then(res => {getAllEvents()})
   .catch(err => {console.log(err)})
@@ -161,34 +163,40 @@ let choiceCheck= ""
 let choiceIndex= null
 let choiceStyle = ""
 
-let timer = 3000;
+let timer = 15000;
 let shouldCount = true;
 
 function byte2Hex(n) {
   var nybHexString = "0123456789ABCDEF";
   return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
 }
-
 setInterval(function() {
   const totalTime = 30000
   const timerText = document.getElementsByClassName("saw-next-game-counter")
   const timerBar = document.getElementsByClassName("announcement")
-
+  
   var minutes = Math.floor((timer % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((timer % (1000 * 60)) / 1000);
-
+  
   minutes = (minutes < 10) ? "0" + minutes : minutes;
   seconds = (seconds < 10) ? "0" + seconds : seconds;
-
+  
   timerBar[0].style.transition = "height 1s linear"
   timerText[0].innerHTML = minutes + ":" + seconds;
-
-  // If the count down is over, write some text 
-  if (timer <= 0) {
-    timerBar[0].style.transition = "none"
-    timerBar[0].style.height = "879px"
-    spin()
-    timer = totalTime
+  
+  // If the count down is over, write some text
+    if (timer <= 0) {
+      timerBar[0].style.transition = "none"
+      timerBar[0].style.height = "879px"
+      axios.get('http://localhost:8000/event')
+      .then(res => {
+        let options = [0,26,3,35,12,28,7,29,18,22,9,31,14,20,1,33,16,24,5,10,23,8,30,11,36,13,27,6,34,17,25,2,21,4,19,15,32];
+        data = res.data.result
+        target = options.indexOf(data)+1
+        spin()
+      })
+      .catch(err => {console.log(err)})
+   timer = totalTime
   } else if (shouldCount) {
     timer-= 1000    
     timerBar[0].style.height = String(879 * timer/totalTime) + "px"
@@ -216,13 +224,12 @@ function spin() {
   spinAngle = 10
   spinDest = 0; 
   spinDestTotal = 360 * 15; // aka Spining Speed
-  rotateWheel(wheel);
+  rotateWheel();
 }
 
-let target = Math.floor(Math.random() * 36)
+let target = 3;
 const rotateWheel = function() {
   spinDest += 20; // aka Spin Duration
-
   if(spinDest >= spinDestTotal) {
     stopRotateWheel(target);
     return;
@@ -260,6 +267,19 @@ function checkIndex() {
   return index
 }
 
+
+
+function updateTickets(eventId) {
+  axios.get('http://localhost:8000/ticketResult')
+  .then(res => { console.log(res);
+    /*
+    axios.put('http://localhost:8000/event', {number: res.data.number,result: winningResult})
+    .then(res => {console.log(res)})
+    .catch(err => {console.log(err)})
+    */
+})
+.catch(err => {console.log(err)})
+}
 
 function checkWin(num){
   // will check if the bet is on

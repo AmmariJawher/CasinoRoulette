@@ -6659,7 +6659,7 @@ body {
 }
 
 #saw-wheel-bg {
-  background-image: url(../public/images/saw-wheel.svg);
+  background-image: url(../public/images/final-wheel.svg);
   background-repeat: no-repeat;
   display: block;
   position: absolute;
@@ -6696,6 +6696,7 @@ body {
   scale: 0.976;
   /*! z-index: -3; */
   background-size: 72%;
+  display: none;
 }
 
 #saw-wheel-sectors.carpet {
